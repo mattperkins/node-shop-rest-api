@@ -2,8 +2,16 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+
 const productRoutes = require('./api/routes/products')
 const orderRoutes = require('./api/routes/orders')
+
+mongoose.connect('mongodb://fedmysoul:' + 
+process.env.MONGO_ATLAS_PW + '@node-shop-rest-api-shard-00-00-quwda.mongodb.net:27017,node-shop-rest-api-shard-00-01-quwda.mongodb.net:27017,node-shop-rest-api-shard-00-02-quwda.mongodb.net:27017/test?ssl=true&replicaSet=node-shop-rest-api-shard-0&authSource=admin', 
+{
+  useMongoClient: true
+})
 
 // middlewhere
 app.use(morgan('dev'))
